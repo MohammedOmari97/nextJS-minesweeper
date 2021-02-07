@@ -2,15 +2,120 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  width: 100%;
+  height: 100%;
+  font-family: "helsinki", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  height: 100vh;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@font-face {
+  font-family: Helsinki;
+  src: url(../fonts/helsinki.ttf);
 }
 
-* {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
+  font-family: inherit;
+}
+
+body {
+  background: var(--background);
+  transition: background 0.1s ease;
+  /* width: fit-content;
+  height: fit-content; */
+}
+
+body.light {
+  --background: #fff;
+  --text-color: #000;
+  --icons-foreground: #000;
+  --cell-closed-bg: #e3e3e311;
+  --cell-closed-border: #e3e3e3;
+  --cell-0-bg: #e3e3e344;
+  --cell-1-bg: #41bf41aa;
+  --cell-1-border: #41bf41;
+  --cell-1-text: #2e862e;
+  --cell-2-bg: #19acfcaa;
+  --cell-2-border: #19acfc;
+  --cell-2-text: #137bb3;
+  --cell-3-bg: #ffe819aa;
+  --cell-3-border: #ffe819;
+  --cell-3-text: #b9a912;
+  --cell-4-bg: #511378aa;
+  --cell-4-border: #511378;
+  --cell-4-text: #511378;
+  --cell-5Plus-bg: #000000aa;
+  --cell-5Plus-border: #000000;
+  --cell-5Plus-text: #000000;
+  /* --cell-bomb-bg: #ff4d3daa; */
+  /* --cell-bomb-border: #ff4d3d; */
+
+  /* ------------- options ------------- */
+  --options-bg: #ffdd49;
+  --options-border: #ffd51b;
+  --options-shadow: rgba(255, 213, 27, 0.5);
+  --input-text: #000;
+}
+
+body.dark {
+  --background: #16161a;
+  --text-color: #fff;
+  --icons-foreground: #fff;
+  /* ------------------------- */
+  /* --cell-closed-bg: #e3e3e311;
+  --cell-closed-border: #e3e3e3; */
+  --cell-closed-bg: #fff;
+  --cell-closed-border: #99999988;
+  /* ------------------------- */
+  /* --cell-0-bg: #e3e3e344; */
+  --cell-0-bg: #e3e3e311;
+  /* ------------------------- */
+  /* --cell-1-bg: #41bf41aa;
+  --cell-1-border: #41bf41;
+  --cell-1-text: #2e862e; */
+  --cell-1-bg: #80d480;
+  --cell-1-border: #41bf41;
+  --cell-1-text: #2e862e;
+  /* ------------------------- */
+  /* --cell-2-bg: #19acfcaa;
+  --cell-2-border: #19acfc;
+  --cell-2-text: #137bb3; */
+  --cell-2-bg: #66c8fd;
+  --cell-2-border: #19acfc;
+  --cell-2-text: #137bb3;
+  /* ------------------------- */
+  /* --cell-3-bg: #ffe819aa;
+  --cell-3-border: #ffe819;
+  --cell-3-text: #b9a912; */
+  --cell-3-bg: #fff066;
+  --cell-3-border: #ffe819;
+  --cell-3-text: #b9a912;
+  /* ------------------------- */
+  /* --cell-4-bg: #511378aa;
+  --cell-4-border: #511378;
+  --cell-4-text: #511378; */
+  --cell-4-bg: #8b62a5;
+  --cell-4-border: #511378;
+  --cell-4-text: #511378;
+  /* ------------------------- */
+  --cell-5Plus-bg: #000000aa;
+  --cell-5Plus-border: #000000;
+  --cell-5Plus-text: #000000;
+  /* ------------------------- */
+  /* --cell-bomb-bg: #ff4d3daa; */
+  /* --cell-bomb-border: #ff4d3d; */
+  /* ------------------------- */
+
+  /* ------------- options ------------- */
+  --options-bg: #4f8cff;
+  --options-border: #216eff;
+  --options-shadow: rgba(79, 140, 255, 0.5);
+  --input-text: #000;
+}
+
+#__next {
+  height: 100%;
 }

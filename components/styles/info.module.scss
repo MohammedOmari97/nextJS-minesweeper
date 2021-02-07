@@ -1,0 +1,297 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  color: #000;
+
+  .exit {
+    width: 40px;
+    height: 40px;
+    // background: var(--options-border);
+    background: #000;
+    border: none;
+    outline: none;
+    padding: 0px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+
+    svg {
+      vertical-align: middle;
+    }
+  }
+
+  .modal {
+    width: 40%;
+    // height: 85%;
+    max-height: 85%;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    background: var(--options-bg);
+    opacity: 0.8;
+    border-width: 1px 1px 5px;
+    border-color: var(--options-border);
+    border-style: solid;
+    overflow: hidden auto;
+    padding-right: 17px;
+    box-sizing: content-box;
+    position: relative;
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      // justify-content: space-around;
+      justify-content: flex-start;
+      align-items: center;
+
+      > * {
+        width: 50%;
+      }
+    }
+
+    .unrevealedCellExample {
+      display: flex;
+      flex-direction: row;
+      // justify-content: center;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+
+      .unrevealedCell {
+        width: 45px;
+        height: 45px;
+        border: none;
+        outline: none;
+        font-size: 22px;
+        background: #fff;
+        border: solid var(--cell-closed-border);
+        border-width: 1px 1px 3px;
+        border-radius: 13px;
+        color: rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        transition: all 0.1s ease;
+
+        &:active {
+          border-width: 1px 1px 1px;
+        }
+      }
+    }
+
+    .bombCellExample {
+      display: flex;
+      flex-direction: row;
+      // justify-content: center;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+
+      .bomb {
+        padding: 10px;
+        background: none;
+        border-width: 1px 1px 3px;
+        border-radius: 13px;
+        color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // opacity: 0.8;
+        border-radius: 50%;
+        animation: showBomb 1.2s 2900 ease both;
+
+        img {
+          width: 30px;
+          height: 30px;
+          filter: invert(55%) sepia(96%) saturate(5074%) hue-rotate(343deg)
+            brightness(94%) contrast(101%);
+          // #F1432B
+        }
+
+        @keyframes showBomb {
+          from {
+            background: #ff0000e7;
+          }
+
+          to {
+            background: transparent;
+          }
+        }
+      }
+    }
+
+    .clearedCellExample {
+      display: flex;
+      flex-direction: row;
+      // justify-content: center;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+
+      .clearedCell {
+        width: 45px;
+        height: 45px;
+        border: none;
+        outline: none;
+        font-size: 22px;
+        background: #e3e3e3bb;
+        // opacity: 0.8;
+        border-radius: 13px;
+      }
+    }
+
+    .clueCellExample {
+      display: flex;
+      flex-direction: row;
+      // justify-content: center;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+
+      .clueCell {
+        width: 45px;
+        height: 45px;
+        border: none;
+        outline: none;
+        font-size: 22px;
+        // background: var(--cell-1-bg);
+        // border: solid var(--cell-1-border);
+        // border: solid var(--cell-1-border);
+        background: #80d480;
+        border: solid #41bf41;
+        color: #2e862e;
+        border-width: 1px 1px 3px;
+        border-radius: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .flaggedCellExample {
+      display: flex;
+      flex-direction: row;
+      // justify-content: center;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+
+      .flaggedCell {
+        width: 45px;
+        height: 45px;
+        border: none;
+        outline: none;
+        font-size: 22px;
+        background: #fff;
+        border: solid var(--cell-closed-border);
+        border-width: 1px 1px 3px;
+        border-radius: 13px;
+        color: rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        transition: all 0.1s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:active {
+          border-width: 1px 1px 1px;
+        }
+
+        img {
+          width: 30px;
+          height: 30px;
+          vertical-align: middle;
+          opacity: 0.7;
+        }
+      }
+    }
+
+    .activeCellExample {
+      display: flex;
+      flex-direction: row;
+      // justify-content: center;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+
+      .activeCell {
+        width: 45px;
+        height: 45px;
+        border: none;
+        outline: none;
+        font-size: 22px;
+        // background: var(--cell-1-bg);
+        // border: solid var(--cell-1-border);
+        // color: var(--cell-1-text);
+        background: #80d480;
+        border: solid #41bf41;
+        color: #2e862e;
+        border-width: 1px 1px 3px;
+        border-radius: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.1s ease;
+
+        &:active {
+          border-width: 1px 1px 1px;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 90%;
+          height: 90%;
+          border-radius: 50%;
+          border: 1px solid var(--cell-1-text);
+        }
+      }
+    }
+
+    p {
+      opacity: 0.7;
+      margin-bottom: 40px;
+      font-weight: 100;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1095px) {
+      width: 60%;
+    }
+
+    @media (max-width: 700px) {
+      width: 90%;
+      padding: 10px;
+    }
+
+    @media (max-width: 475px) {
+      width: 90%;
+      padding: 10px;
+
+      .row {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+
+        > * {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
