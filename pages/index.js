@@ -22,6 +22,49 @@ export default function Home() {
           href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
           rel="stylesheet"
         ></link>
+        <link rel="preload" href="/pop-sound-effect.mp3" as="audio" />
+        <link rel="preload" href="/lost-2.mp3" as="audio" />
+        <link rel="preload" href="/won.mp3" as="audio" />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/slightly-smiling-face.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/rolling-on-the-floor-laughing.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/face-savoring-food.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/grinning-face.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/zany-face.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/sign-of-the-horns_medium-skin-tone.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/see-no-evil-monkey.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/flexed-biceps_medium-skin-tone.png"
+          as="image"
+        />
       </Head>
 
       <Layout
