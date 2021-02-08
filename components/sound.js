@@ -32,9 +32,9 @@ function Sound() {
       !gameOver
     ) {
       dispatch(increasePlaybackRate())
-      for (let i = 0; i < 1000; i++) {
-        console.log("hello")
-      }
+      // for (let i = 0; i < 1000; i++) {
+      //   console.log("hello")
+      // }
       playPop()
     }
   }, [openedCells, gameOver])
