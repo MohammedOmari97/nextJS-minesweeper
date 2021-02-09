@@ -47,7 +47,7 @@ function Sound() {
       //   playSound()
       // }, popSoundDelay)
       playPop()
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < 50; i++) {
         console.log("hello")
       }
       // playPop()

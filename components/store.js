@@ -588,7 +588,7 @@ const cellsSlice = createSlice({
     },
     increasePopSoundDelay: {
       reducer(state) {
-        state.popSoundDelay += 50
+        state.popSoundDelay += 100
       },
     },
     resetPopSoundDelay: {
