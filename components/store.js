@@ -36,10 +36,17 @@ const initialState = {
   gameOver: false,
   openedCells: [],
   theme: "light",
-  sound: false,
+  // theme:
+  //   typeof window !== "undefined"
+  //     ? window.localStorage.getItem("__theme__")
+  //       ? window.localStorage.getItem("__theme__")
+  //       : "light"
+  //     : "light",
+  sound: true,
   bombsIndexes: [],
   clickedCellsForEmojiAnimation: [],
   playbackRate: 0.75,
+  popSoundDelay: 0,
   time: "0:0",
 }
 
@@ -579,6 +586,16 @@ const cellsSlice = createSlice({
         state.playbackRate = 0.75
       },
     },
+    increasePopSoundDelay: {
+      reducer(state) {
+        state.popSoundDelay += 50
+      },
+    },
+    resetPopSoundDelay: {
+      reducer(state) {
+        state.popSoundDelay = 0
+      },
+    },
     setTime: {
       reducer(state, action) {
         state.time = action.payload.time
@@ -604,6 +621,21 @@ const info = createSlice({
   },
 })
 
+const fullscreen = createSlice({
+  name: "fullscreen",
+  initialState: false,
+  reducers: {
+    setFullscreen: {
+      reducer(_state, action) {
+        return action.payload.fullscreen
+      },
+      prepare(fullscreen) {
+        return { payload: { fullscreen } }
+      },
+    },
+  },
+})
+
 export const {
   setBombs,
   setRows,
@@ -622,14 +654,19 @@ export const {
   increasePlaybackRate,
   resetPlaybackRate,
   setTime,
+  increasePopSoundDelay,
+  resetPopSoundDelay,
 } = cellsSlice.actions
 
 export const { toggleInfo } = info.actions
+
+export const { setFullscreen } = fullscreen.actions
 
 const store = configureStore({
   reducer: {
     cells: cellsSlice.reducer,
     info: info.reducer,
+    fullscreen: fullscreen.reducer,
   },
 })
 

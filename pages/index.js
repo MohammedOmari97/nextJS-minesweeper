@@ -10,6 +10,7 @@ export default function Home() {
   const { mode, theme } = useSelector((state) => state.cells)
 
   useEffect(() => {
+    // window.localStorage.setItem("__theme__", theme)
     document.body.className = theme
   }, [theme])
 
@@ -63,6 +64,41 @@ export default function Home() {
         <link
           rel="preload"
           href="/minesweeper-icons/flexed-biceps_medium-skin-tone.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/face-with-head-bandage.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/dizzy-face.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/pile-of-poo.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/loudly-crying-face.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/tired-face.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/face-vomiting.png"
+          as="image"
+        />
+        <link
+          rel="preload"
+          href="/minesweeper-icons/flushed-face.png"
           as="image"
         />
       </Head>

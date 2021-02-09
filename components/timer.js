@@ -15,11 +15,12 @@ function Timer() {
       const id = setInterval(() => {
         setSeconds((seconds) => {
           if (seconds + 1 >= 60) {
-            dispatch(setTime(`${minutes + 1}:0`))
-            setMinutes((minutes) => minutes + 1)
+            setMinutes((minutes) => {
+              console.log(seconds, minutes + 1)
+              return minutes + 1
+            })
             return 0
           } else {
-            dispatch(setTime(`${minutes}:${seconds + 1}`))
             return seconds + 1
           }
         })
@@ -31,6 +32,10 @@ function Timer() {
       setMinutes(0)
     }
   }, [status])
+
+  useEffect(() => {
+    dispatch(setTime(`${minutes}:${seconds}`))
+  }, [seconds, minutes])
 
   return (
     <div>

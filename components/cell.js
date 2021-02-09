@@ -6,6 +6,7 @@ import {
   flagCell,
   gameOver,
   resetPlaybackRate,
+  resetPopSoundDelay,
 } from "./store"
 import styles from "./styles/cell.module.scss"
 
@@ -76,9 +77,11 @@ function Cell({ row, column, ...props }) {
       onClick={(e) => {
         if (e.button === 0 && isActive && isOpened) {
           dispatch(resetPlaybackRate())
+          dispatch(resetPopSoundDelay())
           dispatch(revealSurrounding(row, column))
         } else if (e.button === 0 && !isFlag) {
           dispatch(resetPlaybackRate())
+          dispatch(resetPopSoundDelay())
           dispatch(revealCell(row, column))
         }
       }}

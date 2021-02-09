@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./styles/layout.module.scss"
-import { Maximize, ArrowLeft, Info as InfoIcon } from "react-feather"
+import { Maximize, ArrowLeft, Info as InfoIcon, Minimize } from "react-feather"
 import Emoji from "./emoji"
 import { useDispatch, useSelector } from "react-redux"
 import NightModeToggle from "./nightModeToggle"
-import { setMode, toggleInfo, toggleTheme } from "./store"
+import { setMode, toggleInfo, toggleTheme, setFullscreen } from "./store"
 import Timer from "./timer"
 import RemainingCells from "./remainingCells"
 import GameOver from "./gameOver"
@@ -42,10 +42,31 @@ import Sound from "./sound"
 
 function Layout({ render }) {
   const { mode } = useSelector((state) => state.cells)
+  const fullscreen = useSelector((state) => state.fullscreen)
   const dispatch = useDispatch()
+
+  // typeof window !== "undefined"
+  //   ? console.log(window.document.fullscreenElement)
+  //   : null
 
   const [horizontalScrollBarHeight, setHorizontalScrollBarHeight] = useState(0)
   const [verticalScrollBarWidth, setVerticalScrollBarWidth] = useState(0)
+
+  useEffect(() => {
+    const listener = window.document.addEventListener(
+      "fullscreenchange",
+      () => {
+        if (window.document.fullscreenElement) {
+          dispatch(setFullscreen(true))
+        } else {
+          dispatch(setFullscreen(false))
+        }
+      }
+    )
+
+    return () =>
+      window.document.removeEventListener("fullscreenchange", listener)
+  })
 
   return (
     <div
@@ -114,12 +135,29 @@ function Layout({ render }) {
               <Timer />
             </>
           ) : null}
-          <Maximize
-            color="var(--icons-foreground)"
-            style={{ opacity: 0.8 }}
-            size={20}
-            strokeWidth={3}
-          />
+          {typeof window !== "undefined" ? (
+            fullscreen ? (
+              <Minimize
+                color="var(--icons-foreground)"
+                style={{ opacity: 0.8 }}
+                size={20}
+                strokeWidth={3}
+                onClick={() => {
+                  window.document.exitFullscreen()
+                }}
+              />
+            ) : (
+              <Maximize
+                color="var(--icons-foreground)"
+                style={{ opacity: 0.8 }}
+                size={20}
+                strokeWidth={3}
+                onClick={() => {
+                  window.document.documentElement.requestFullscreen()
+                }}
+              />
+            )
+          ) : null}
         </footer>
         <GameOver />
         <Info />

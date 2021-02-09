@@ -1,7 +1,11 @@
-import React, { useEffect } from "react"
+import React, { useCallback, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import useSound from "use-sound"
-import { toggleSound, increasePlaybackRate } from "./store"
+import {
+  toggleSound,
+  increasePlaybackRate,
+  increasePopSoundDelay,
+} from "./store"
 import { Volume2, VolumeX } from "react-feather"
 
 function Sound() {
@@ -15,10 +19,15 @@ function Sound() {
     rows,
     columns,
     bombs,
+    popSoundDelay,
   } = useSelector((state) => state.cells)
   const [playPop] = useSound("/pop-sound-effect.mp3", { playbackRate })
   const [playWon] = useSound("/won.mp3")
   const [playLost] = useSound("/lost-2.mp3")
+
+  function playSound() {
+    playPop()
+  }
 
   useEffect(() => {
     if (sound && gameOver && status === "won") {
@@ -32,10 +41,16 @@ function Sound() {
       !gameOver
     ) {
       dispatch(increasePlaybackRate())
-      // for (let i = 0; i < 1000; i++) {
-      //   console.log("hello")
-      // }
+      // dispatch(increasePopSoundDelay())
+      // setTimeout(() => {
+      //   // playPop()
+      //   playSound()
+      // }, popSoundDelay)
       playPop()
+      for (let i = 0; i < 1000; i++) {
+        console.log("hello")
+      }
+      // playPop()
     }
   }, [openedCells, gameOver])
 

@@ -72,6 +72,9 @@ function GameOver() {
         ? score.split(":")
         : "1000:1000".split(":")
 
+      console.log(time, currentMins, currentSecs)
+      console.log(score, scoreMins, scoreSecs)
+
       if (
         Number(`${currentMins}${currentSecs}`) <
         Number(`${scoreMins}${scoreSecs}`)
