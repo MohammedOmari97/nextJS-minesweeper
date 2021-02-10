@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, memo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import {
   revealCell,
@@ -9,11 +9,13 @@ import {
 } from "./store"
 import styles from "./styles/cell.module.scss"
 
-function Cell({ row, column, ...props }) {
+const Cell = memo(function Cell({ row, column, ...props }) {
   const dispatch = useDispatch()
   const { isBomb, surrounding, isOpened, isFlag, isActive } = useSelector(
     (state) => state.cells.cells[row][column]
   )
+
+  console.log("rendering cell")
 
   useEffect(() => {
     if (isOpened && isBomb) {
@@ -93,6 +95,6 @@ function Cell({ row, column, ...props }) {
       ></div>
     </button>
   )
-}
+})
 
 export default Cell
