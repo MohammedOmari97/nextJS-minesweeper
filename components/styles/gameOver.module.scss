@@ -75,6 +75,11 @@
     }
   }
 
+  .lost {
+    min-height: 240px;
+    justify-content: space-between;
+  }
+
   @media screen and (max-width: 1000px) {
     .won,
     .lost {
