@@ -11,43 +11,10 @@ import GameOver from "./gameOver"
 import Info from "./info"
 import Sound from "./sound"
 
-// const getScrollBarHeight = debounce(function getScrollBarWidth() {
-//   if (typeof window !== "undefined") {
-//     var inner = document.createElement("p")
-//     inner.style.width = "100%"
-//     inner.style.height = "200px"
-
-//     var outer = document.createElement("div")
-//     outer.style.position = "absolute"
-//     outer.style.top = "0px"
-//     outer.style.left = "0px"
-//     outer.style.visibility = "hidden"
-//     outer.style.width = "200px"
-//     outer.style.height = "150px"
-//     outer.style.overflow = "hidden"
-//     outer.appendChild(inner)
-
-//     document.body.appendChild(outer)
-//     var w1 = inner.offsetWidth
-//     outer.style.overflow = "scroll"
-//     var w2 = inner.offsetWidth
-//     if (w1 == w2) w2 = outer.clientWidth
-
-//     document.body.removeChild(outer)
-
-//     console.log(w1 - w2)
-//     return w1 - w2
-//   }
-// }, 500)
-
 function Layout({ render }) {
   const { mode } = useSelector((state) => state.cells)
   const fullscreen = useSelector((state) => state.fullscreen)
   const dispatch = useDispatch()
-
-  // typeof window !== "undefined"
-  //   ? console.log(window.document.fullscreenElement)
-  //   : null
 
   const [horizontalScrollBarHeight, setHorizontalScrollBarHeight] = useState(0)
   const [verticalScrollBarWidth, setVerticalScrollBarWidth] = useState(0)
@@ -105,11 +72,9 @@ function Layout({ render }) {
             <Sound />
           </div>
         </nav>
-        {/* {children} */}
         {render(setHorizontalScrollBarHeight, setVerticalScrollBarWidth)}
         <footer
           className={styles.footer}
-          // style={{ bottom: `${getScrollBarWidth()}px` }}
           style={{
             bottom: `${horizontalScrollBarHeight}px`,
             width: `calc(100% - ${verticalScrollBarWidth}px)`,
@@ -118,13 +83,13 @@ function Layout({ render }) {
           {mode === "playing" ? (
             <ArrowLeft
               color="var(--icons-foreground)"
-              style={{ opacity: 0.8 }}
+              style={{ opacity: 0.8, cursor: "pointer" }}
               onClick={() => dispatch(setMode("options"))}
             />
           ) : (
             <InfoIcon
               color="var(--icons-foreground)"
-              style={{ opacity: 0.8 }}
+              style={{ opacity: 0.8, cursor: "pointer" }}
               size={20}
               strokeWidth={3}
               onClick={() => dispatch(toggleInfo())}
@@ -139,7 +104,7 @@ function Layout({ render }) {
             fullscreen ? (
               <Minimize
                 color="var(--icons-foreground)"
-                style={{ opacity: 0.8 }}
+                style={{ opacity: 0.8, cursor: "pointer" }}
                 size={20}
                 strokeWidth={3}
                 onClick={() => {
@@ -149,7 +114,7 @@ function Layout({ render }) {
             ) : (
               <Maximize
                 color="var(--icons-foreground)"
-                style={{ opacity: 0.8 }}
+                style={{ opacity: 0.8, cursor: "pointer" }}
                 size={20}
                 strokeWidth={3}
                 onClick={() => {

@@ -6,23 +6,14 @@ import {
   flagCell,
   gameOver,
   resetPlaybackRate,
-  resetPopSoundDelay,
 } from "./store"
 import styles from "./styles/cell.module.scss"
 
 function Cell({ row, column, ...props }) {
   const dispatch = useDispatch()
-  // console.log(row, column)
   const { isBomb, surrounding, isOpened, isFlag, isActive } = useSelector(
     (state) => state.cells.cells[row][column]
   )
-  // console.log(surrounding)
-
-  // useEffect(() => {
-  //   if (isOpened) {
-  //     dispatch(calcSurrounding(row, column))
-  //   }
-  // }, [isOpened])
 
   useEffect(() => {
     if (isOpened && isBomb) {
@@ -39,7 +30,6 @@ function Cell({ row, column, ...props }) {
     cellContent = <img src="/minesweeper-icons/flag.png" alt="flag icon" />
   } else if (isOpened) {
     if (isBomb) {
-      // cellContent = "bomb"
       cellContent = <img src="/minesweeper-icons/mine.svg" alt="bomb icon" />
     } else {
       if (surrounding === 0) {
@@ -77,11 +67,9 @@ function Cell({ row, column, ...props }) {
       onClick={(e) => {
         if (e.button === 0 && isActive && isOpened) {
           dispatch(resetPlaybackRate())
-          dispatch(resetPopSoundDelay())
           dispatch(revealSurrounding(row, column))
         } else if (e.button === 0 && !isFlag) {
           dispatch(resetPlaybackRate())
-          dispatch(resetPopSoundDelay())
           dispatch(revealCell(row, column))
         }
       }}

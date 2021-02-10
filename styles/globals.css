@@ -47,9 +47,12 @@ body.light {
   --cell-4-bg: #511378aa;
   --cell-4-border: #511378;
   --cell-4-text: #511378;
-  --cell-5Plus-bg: #000000aa;
+  /* --cell-5Plus-bg: #000000aa;
   --cell-5Plus-border: #000000;
-  --cell-5Plus-text: #000000;
+  --cell-5Plus-text: #000000; */
+  --cell-5Plus-bg: #ff897f;
+  --cell-5Plus-border: #e26a6a;
+  --cell-5Plus-text: #a94b5a;
   /* --cell-bomb-bg: #ff4d3daa; */
   /* --cell-bomb-border: #ff4d3d; */
 
@@ -101,9 +104,12 @@ body.dark {
   --cell-4-border: #511378;
   --cell-4-text: #511378;
   /* ------------------------- */
-  --cell-5Plus-bg: #000000aa;
+  /* --cell-5Plus-bg: #000000aa;
   --cell-5Plus-border: #000000;
-  --cell-5Plus-text: #000000;
+  --cell-5Plus-text: #000000; */
+  --cell-5Plus-bg: #ff897f;
+  --cell-5Plus-border: #e26a6a;
+  --cell-5Plus-text: #a94b5a;
   /* ------------------------- */
   /* --cell-bomb-bg: #ff4d3daa; */
   /* --cell-bomb-border: #ff4d3d; */

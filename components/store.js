@@ -36,12 +36,6 @@ const initialState = {
   gameOver: false,
   openedCells: [],
   theme: "light",
-  // theme:
-  //   typeof window !== "undefined"
-  //     ? window.localStorage.getItem("__theme__")
-  //       ? window.localStorage.getItem("__theme__")
-  //       : "light"
-  //     : "light",
   sound: true,
   bombsIndexes: [],
   clickedCellsForEmojiAnimation: [],
@@ -214,23 +208,9 @@ const cellsSlice = createSlice({
     initializeGrid: {
       reducer(state) {
         let { rows, columns } = state
-        // let { bombs, rows, columns, firstCell } = state
-        // let { row, column } = firstCell
         const cells = Array(rows)
           .fill(null)
           .map(() => Array(columns).fill(null))
-
-        // function getSurrounding(row, column) {
-        //   let bombCount
-        //   for (let i = row - 1; i < row + 2; i++) {
-        //     for (let j = column - 1; j < column + 2; j++) {
-        //       if (i < rows && i < 0 && j < columns && j > 0) {
-        //         if (cells[i][j].bomb) bombCount++
-        //       }
-        //     }
-        //   }
-        //   return bombCount
-        // }
 
         for (let i = 0; i < rows; i++) {
           for (let j = 0; j < columns; j++) {
@@ -242,23 +222,6 @@ const cellsSlice = createSlice({
             }
           }
         }
-
-        // let isBomb
-        // let bombCount = 0
-        // for (let i = 0; i < rows; i++) {
-        //   for (let j = 0; j < columns; j++) {
-        //     if (row === i && column === j) {
-        //       cells[i][j] = { isOpened: true, bomb: false, surrounding: getSurrounding(i, j) }
-        //     }
-
-        //     if (bombCount < bombs && Math.random() > 0.5) {
-        //       isBomb = true
-        //     } else {
-        //       isBomb = false
-        //     }
-        //     cells[i][j] = { isOpened: false, bomb: isBomb }
-        //   }
-        // }
       },
     },
     revealCell: {
@@ -294,11 +257,11 @@ const cellsSlice = createSlice({
 
           let allExcluded = getSurrounding(row, column).surrounding.map(
             (point) => {
-              return getIndex(point.x, point.y, state.rows, state.columns)
+              return getIndex(point.x, point.y, state.columns)
             }
           )
 
-          allExcluded.push(getIndex(row, column, state.rows, state.columns))
+          allExcluded.push(getIndex(row, column, state.columns))
 
           let bombsIndexes = []
           for (let i = 0; i < state.bombs; i++) {
@@ -318,51 +281,20 @@ const cellsSlice = createSlice({
 
           // planting bombs :O `Dangerous 💣`
           for (let i = 0; i < bombsIndexes.length; i++) {
-            let { row, column } = getPosition(
-              bombsIndexes[i],
-              state.rows,
-              state.columns
-            )
+            let { row, column } = getPosition(bombsIndexes[i], state.columns)
             state.cells[row][column].isBomb = true
           }
 
-          // for (let i = 0; i < state.rows; i++) {
-          //   for (let j = 0; j < state.columns; j++) {
-          //     if (row === i && column === j) {
-          //       state.cells[i][j].isBomb = false
-          //     } else {
-          //       if (bombCount < state.bombs && Math.random() > 0.5) {
-          //         isBomb = true
-          //         bombCount++
-          //       } else {
-          //         isBomb = false
-          //       }
-          //       state.cells[i][j] = { isBomb }
-          //     }
-          //   }
-          // }
-
           let surrounding = 0
           for (let i = 0; i < state.rows * state.columns; i++) {
-            let { row, column } = getPosition(i, state.rows, state.columns)
+            let { row, column } = getPosition(i, state.columns)
             surrounding = getSurrounding(row, column).bombCount
             state.cells[row][column].surrounding = surrounding
           }
-          // for (let i = 0; i < state.rows; i++) {
-          //   for (let j = 0; j < state.columns; j++) {
-          //     surrounding = getSurrounding(i, j)
-          //     state.cells[i][j].surrounding = surrounding
-          //   }
-          // }
 
           state.cells[row][column].isOpened = true
           state.openedCells.push(
-            getIndex(
-              action.payload.row,
-              action.payload.column,
-              state.rows,
-              state.columns
-            )
+            getIndex(action.payload.row, action.payload.column, state.columns)
           )
         } else {
           if (state.cells[action.payload.row][action.payload.column].isBomb) {
@@ -376,7 +308,6 @@ const cellsSlice = createSlice({
             for (let i = 0; i < state.bombsIndexes.length; i++) {
               let { row, column } = getPosition(
                 state.bombsIndexes[i],
-                state.rows,
                 state.columns
               )
               state.cells[row][column].isOpened = true
@@ -393,7 +324,6 @@ const cellsSlice = createSlice({
                 getIndex(
                   action.payload.row,
                   action.payload.column,
-                  state.rows,
                   state.columns
                 )
               )
@@ -428,21 +358,14 @@ const cellsSlice = createSlice({
               !state.cells[i][j].isFlag
             ) {
               if (!state.cells[i][j].isOpened) {
-                // state.cells[i][j].isOpened = true
-                // state.openedCells.push(
-                //   getIndex(i, j, state.rows, state.columns)
-                // )
                 if (!state.cells[i][j].isBomb) {
                   state.cells[i][j].isOpened = true
-                  state.openedCells.push(
-                    getIndex(i, j, state.rows, state.columns)
-                  )
+                  state.openedCells.push(getIndex(i, j, state.columns))
                 } else {
                   state.cells[i][j].isOpened = true
                   for (let i = 0; i < state.bombsIndexes.length; i++) {
                     let { row, column } = getPosition(
                       state.bombsIndexes[i],
-                      state.rows,
                       state.columns
                     )
                     state.cells[row][column].isOpened = true
@@ -463,11 +386,9 @@ const cellsSlice = createSlice({
         function getSurrounding(row, column) {
           let bombCount = 0
           let surrounding = []
-          // console.log(row, column)
           for (let i = row - 1; i < row + 2; i++) {
             for (let j = column - 1; j < column + 2; j++) {
               if (i < state.rows && i >= 0 && j < state.columns && j >= 0) {
-                // console.log(i, j)
                 surrounding.push({ x: i, y: j })
                 if (state.cells[i][j].isBomb) bombCount++
               }
@@ -586,16 +507,6 @@ const cellsSlice = createSlice({
         state.playbackRate = 0.75
       },
     },
-    increasePopSoundDelay: {
-      reducer(state) {
-        state.popSoundDelay += 100
-      },
-    },
-    resetPopSoundDelay: {
-      reducer(state) {
-        state.popSoundDelay = 0
-      },
-    },
     setTime: {
       reducer(state, action) {
         state.time = action.payload.time
@@ -654,8 +565,6 @@ export const {
   increasePlaybackRate,
   resetPlaybackRate,
   setTime,
-  increasePopSoundDelay,
-  resetPopSoundDelay,
 } = cellsSlice.actions
 
 export const { toggleInfo } = info.actions

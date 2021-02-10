@@ -1,11 +1,7 @@
-import React, { useCallback, useEffect } from "react"
+import React, { useEffect, useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import useSound from "use-sound"
-import {
-  toggleSound,
-  increasePlaybackRate,
-  increasePopSoundDelay,
-} from "./store"
+import { toggleSound, increasePlaybackRate } from "./store"
 import { Volume2, VolumeX } from "react-feather"
 
 function Sound() {
@@ -19,15 +15,18 @@ function Sound() {
     rows,
     columns,
     bombs,
-    popSoundDelay,
   } = useSelector((state) => state.cells)
   const [playPop] = useSound("/pop-sound-effect.mp3", { playbackRate })
   const [playWon] = useSound("/won.mp3")
   const [playLost] = useSound("/lost-2.mp3")
 
-  function playSound() {
-    playPop()
-  }
+  const deviceWidth = useMemo(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth
+    } else {
+      return null
+    }
+  }, [])
 
   useEffect(() => {
     if (sound && gameOver && status === "won") {
@@ -40,17 +39,23 @@ function Sound() {
       sound &&
       !gameOver
     ) {
-      dispatch(increasePlaybackRate())
-      // dispatch(increasePopSoundDelay())
-      // setTimeout(() => {
-      //   // playPop()
-      //   playSound()
-      // }, popSoundDelay)
       playPop()
-      for (let i = 0; i < 50; i++) {
-        console.log("hello")
+      dispatch(increasePlaybackRate())
+
+      let delay
+      if (deviceWidth <= 850) {
+        delay = 50
+      } else {
+        if (rows > 15 || columns > 15) {
+          delay = 100
+        } else {
+          delay = 1000
+        }
       }
-      // playPop()
+
+      for (let i = 0; i < delay; i++) {
+        console.log("")
+      }
     }
   }, [openedCells, gameOver])
 
@@ -59,13 +64,13 @@ function Sound() {
       {sound ? (
         <Volume2
           color="var(--icons-foreground)"
-          style={{ opacity: 0.8 }}
+          style={{ opacity: 0.8, cursor: "pointer" }}
           onClick={() => dispatch(toggleSound())}
         />
       ) : (
         <VolumeX
           color="var(--icons-foreground)"
-          style={{ opacity: 0.8 }}
+          style={{ opacity: 0.8, cursor: "pointer" }}
           onClick={() => dispatch(toggleSound())}
         />
       )}

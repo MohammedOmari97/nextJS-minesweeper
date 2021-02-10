@@ -30,10 +30,6 @@ function Game({ setHorizontalScrollBarHeight, setVerticalScrollBarWidth }) {
     return () => window.removeEventListener("resize", listener)
   }, [])
 
-  // useEffect(() => {
-  //   dispatch(initializeGrid())
-  // }, [])
-
   return (
     <div ref={containerRef} className={styles.container}>
       <div data-testid="grid" className={styles.grid}>

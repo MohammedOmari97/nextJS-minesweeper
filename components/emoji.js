@@ -83,11 +83,11 @@ function Emoji() {
           ]
         )
         setTimeout(() => {
-          // if (!gameOverRef.current) {
-          // ^^ solves the case where the user wins from the first click and the idle emoji overrides the winning emoji
-          changeKey.current = false
-          setImageURL(emojis.idle)
-          // }
+          if (!gameOverRef.current) {
+            // ^^ solves the case where the user wins from the first click and the idle emoji overrides the winning emoji
+            changeKey.current = false
+            setImageURL(emojis.idle)
+          }
         }, 550)
       } else {
         changeKey.current = false

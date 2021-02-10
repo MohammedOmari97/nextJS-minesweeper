@@ -10,7 +10,6 @@ export default function Home() {
   const { mode, theme } = useSelector((state) => state.cells)
 
   useEffect(() => {
-    // window.localStorage.setItem("__theme__", theme)
     document.body.className = theme
   }, [theme])
 
@@ -26,6 +25,7 @@ export default function Home() {
         <link rel="preload" href="/pop-sound-effect.mp3" as="audio" />
         <link rel="preload" href="/lost-2.mp3" as="audio" />
         <link rel="preload" href="/won.mp3" as="audio" />
+        <link rel="preload" href="/flag.png" as="image" />
         <link
           rel="preload"
           href="/minesweeper-icons/slightly-smiling-face.png"
@@ -117,7 +117,6 @@ export default function Home() {
           }
         }}
       />
-      {/* }}>{mode === "options" ? <Options /> : <Game />}</Layout> */}
     </div>
   )
 }
