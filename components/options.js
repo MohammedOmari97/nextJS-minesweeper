@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import styles from "./styles/options.module.scss"
 import { useDispatch, useSelector } from "react-redux"
 import {
@@ -16,9 +16,31 @@ function Options() {
     (state) => state.cells
   )
 
+  const deviceWidth = useMemo(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth
+    } else {
+      return null
+    }
+  }, [])
+
+  let isMobile
+  if (deviceWidth <= 850) {
+    isMobile = true
+  } else {
+    isMobile = false
+  }
+  console.log(isMobile)
+
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          dispatch(setMode("playing"))
+        }}
+        className={styles.content}
+      >
         <label className={styles.selectContainer}>
           <span>Set Difficulty</span>
           <select
@@ -28,7 +50,7 @@ function Options() {
           >
             <option>easy</option>
             <option>medium</option>
-            <option>hard</option>
+            {!isMobile && <option>hard</option>}
             <option>custom</option>
           </select>
         </label>
@@ -41,6 +63,8 @@ function Options() {
               type="number"
               placeholder="number of rows"
               onChange={(e) => dispatch(setColumns(Number(e.target.value)))}
+              min={1}
+              max={isMobile ? 16 : 24}
             />
           </label>
           <label className={styles.inputNumberContainer}>
@@ -51,6 +75,8 @@ function Options() {
               type="number"
               placeholder="number of columns"
               onChange={(e) => dispatch(setRows(Number(e.target.value)))}
+              min={1}
+              max={isMobile ? 16 : 24}
             />
           </label>
         </div>
@@ -62,10 +88,12 @@ function Options() {
             type="number"
             placeholder="number of bombs"
             onChange={(e) => dispatch(setBombs(Number(e.target.value)))}
+            max={rows * columns - 10}
+            min={1}
           />
         </label>
-        <Button onClick={() => dispatch(setMode("playing"))}>play</Button>
-      </div>
+        <Button type="submit">play</Button>
+      </form>
     </div>
   )
 }
