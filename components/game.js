@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, memo } from "react"
 import styles from "./styles/game.module.scss"
 import { useDispatch, useSelector } from "react-redux"
 import { initializeGrid } from "../components/store"
@@ -8,6 +8,8 @@ import { debounce } from "debounce"
 function Game({ setHorizontalScrollBarHeight, setVerticalScrollBarWidth }) {
   const dispatch = useDispatch()
   const { rows, columns } = useSelector((state) => state.cells)
+
+  console.log("rendering game")
 
   const containerRef = useRef()
 
@@ -62,4 +64,4 @@ function Game({ setHorizontalScrollBarHeight, setVerticalScrollBarWidth }) {
   )
 }
 
-export default Game
+export default memo(Game)

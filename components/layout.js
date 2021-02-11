@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { memo, useEffect, useState } from "react"
 import styles from "./styles/layout.module.scss"
 import { Maximize, ArrowLeft, Info as InfoIcon, Minimize } from "react-feather"
 import Emoji from "./emoji"
@@ -15,6 +15,8 @@ function Layout({ render }) {
   const { mode } = useSelector((state) => state.cells)
   const fullscreen = useSelector((state) => state.fullscreen)
   const dispatch = useDispatch()
+
+  console.log("rendering layout")
 
   const [horizontalScrollBarHeight, setHorizontalScrollBarHeight] = useState(0)
   const [verticalScrollBarWidth, setVerticalScrollBarWidth] = useState(0)
@@ -131,4 +133,4 @@ function Layout({ render }) {
   )
 }
 
-export default Layout
+export default memo(Layout)

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import Options from "../components/options"
 import Game from "../components/game"
 import Layout from "../components/layout"
-import { useEffect } from "react"
+import { useEffect, useCallback } from "react"
 
 export default function Home() {
   const { mode, theme } = useSelector((state) => state.cells)
@@ -12,6 +12,22 @@ export default function Home() {
   useEffect(() => {
     document.body.className = theme
   }, [theme])
+
+  const render = useCallback(
+    (setHorizontalScrollBarHeight, setVerticalScrollBarWidth) => {
+      if (mode === "options") {
+        return <Options />
+      } else {
+        return (
+          <Game
+            setHorizontalScrollBarHeight={setHorizontalScrollBarHeight}
+            setVerticalScrollBarWidth={setVerticalScrollBarWidth}
+          />
+        )
+      }
+    },
+    [mode]
+  )
 
   return (
     <div className={styles.container}>
@@ -25,7 +41,8 @@ export default function Home() {
         <link rel="preload" href="/pop-sound-effect.mp3" as="audio" />
         <link rel="preload" href="/lost-2.mp3" as="audio" />
         <link rel="preload" href="/won.mp3" as="audio" />
-        <link rel="preload" href="/flag.png" as="image" />
+        <link rel="preload" href="/minesweeper-icons/flag.png" as="image" />
+        <link rel="preload" href="/minesweeper-icons/mine.svg" as="image" />
         <link
           rel="preload"
           href="/minesweeper-icons/slightly-smiling-face.png"
@@ -104,18 +121,19 @@ export default function Home() {
       </Head>
 
       <Layout
-        render={(setHorizontalScrollBarHeight, setVerticalScrollBarWidth) => {
-          if (mode === "options") {
-            return <Options />
-          } else {
-            return (
-              <Game
-                setHorizontalScrollBarHeight={setHorizontalScrollBarHeight}
-                setVerticalScrollBarWidth={setVerticalScrollBarWidth}
-              />
-            )
-          }
-        }}
+        render={render}
+        // render={(setHorizontalScrollBarHeight, setVerticalScrollBarWidth) => {
+        //   if (mode === "options") {
+        //     return <Options />
+        //   } else {
+        //     return (
+        //       <Game
+        //         setHorizontalScrollBarHeight={setHorizontalScrollBarHeight}
+        //         setVerticalScrollBarWidth={setVerticalScrollBarWidth}
+        //       />
+        //     )
+        //   }
+        // }}
       />
     </div>
   )

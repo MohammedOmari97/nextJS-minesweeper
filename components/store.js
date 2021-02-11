@@ -41,7 +41,7 @@ const initialState = {
   clickedCellsForEmojiAnimation: [],
   playbackRate: 0.75,
   popSoundDelay: 0,
-  time: "0:0",
+  // time: "0:0",
 }
 
 const cellsSlice = createSlice({
@@ -507,14 +507,6 @@ const cellsSlice = createSlice({
         state.playbackRate = 0.75
       },
     },
-    setTime: {
-      reducer(state, action) {
-        state.time = action.payload.time
-      },
-      prepare(time) {
-        return { payload: { time } }
-      },
-    },
   },
 })
 
@@ -547,6 +539,23 @@ const fullscreen = createSlice({
   },
 })
 
+const time = createSlice({
+  name: "time",
+  initialState: {
+    time: "0:0",
+  },
+  reducers: {
+    setTime: {
+      reducer(state, action) {
+        state.time = action.payload.time
+      },
+      prepare(time) {
+        return { payload: { time } }
+      },
+    },
+  },
+})
+
 export const {
   setBombs,
   setRows,
@@ -564,18 +573,20 @@ export const {
   toggleSound,
   increasePlaybackRate,
   resetPlaybackRate,
-  setTime,
 } = cellsSlice.actions
 
 export const { toggleInfo } = info.actions
 
 export const { setFullscreen } = fullscreen.actions
 
+export const { setTime } = time.actions
+
 const store = configureStore({
   reducer: {
     cells: cellsSlice.reducer,
     info: info.reducer,
     fullscreen: fullscreen.reducer,
+    time: time.reducer,
   },
 })
 

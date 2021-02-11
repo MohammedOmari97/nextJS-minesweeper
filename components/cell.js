@@ -9,7 +9,7 @@ import {
 } from "./store"
 import styles from "./styles/cell.module.scss"
 
-const Cell = memo(function Cell({ row, column, ...props }) {
+function Cell({ row, column, ...props }) {
   const dispatch = useDispatch()
   const { isBomb, surrounding, isOpened, isFlag, isActive } = useSelector(
     (state) => state.cells.cells[row][column]
@@ -95,6 +95,6 @@ const Cell = memo(function Cell({ row, column, ...props }) {
       ></div>
     </button>
   )
-})
+}
 
-export default Cell
+export default memo(Cell)

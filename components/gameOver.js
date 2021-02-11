@@ -38,8 +38,8 @@ function GameOver() {
     columns,
     bombs,
     openedCells,
-    time,
   } = useSelector((state) => state.cells)
+  const { time } = useSelector((state) => state.time)
   const dispatch = useDispatch()
   const transition = useTransition(gameOver, null, {
     from: {
