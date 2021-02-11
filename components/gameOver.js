@@ -30,18 +30,13 @@ function getGameOverMessage(status, cellsLeft) {
 }
 
 function GameOver() {
-  const {
-    gameOver,
-    status,
-    difficulty,
-    rows,
-    columns,
-    bombs,
-    openedCells,
-  } = useSelector((state) => state.cells)
+  const { status, difficulty, rows, columns, bombs, openedCells } = useSelector(
+    (state) => state.cells
+  )
   const { time } = useSelector((state) => state.time)
   const dispatch = useDispatch()
-  const transition = useTransition(gameOver, null, {
+
+  const transition = useTransition(status, null, {
     from: {
       opacity: 0,
       transform: "translateY(20px)",
@@ -91,9 +86,9 @@ function GameOver() {
     <>
       {transition.map((props) => {
         return (
-          props.item && (
+          (props.item === "won" || props.item === "lost") && (
             <div className={styles.container} data-testid="gameOver">
-              {status === "won" ? (
+              {props.item === "won" && (
                 <animated.div className={styles.won} style={props.props}>
                   <div className={styles.message}>
                     <div>You Won!</div>
@@ -154,7 +149,8 @@ function GameOver() {
                     Play again!
                   </Button>
                 </animated.div>
-              ) : (
+              )}
+              {props.item === "lost" && (
                 <animated.div className={styles.lost} style={props.props}>
                   <div className={styles.message}>
                     <div>Ahhhhh, You Lost!</div>

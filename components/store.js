@@ -36,7 +36,7 @@ const initialState = {
   gameOver: false,
   openedCells: [],
   theme: "light",
-  sound: false,
+  sound: true,
   bombsIndexes: [],
   clickedCellsForEmojiAnimation: [],
   playbackRate: 0.75,
