@@ -25,12 +25,14 @@ function Options() {
   }, [])
 
   let isMobile
-  if (deviceWidth <= 850) {
-    isMobile = true
-  } else {
-    isMobile = false
+  // why? 🔽
+  if (typeof window !== "undefined") {
+    if (deviceWidth <= 850) {
+      isMobile = true
+    } else {
+      isMobile = false
+    }
   }
-  console.log(isMobile)
 
   return (
     <div className={styles.container}>

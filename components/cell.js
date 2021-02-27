@@ -15,8 +15,6 @@ function Cell({ row, column, ...props }) {
     (state) => state.cells.cells[row][column]
   )
 
-  console.log("rendering cell")
-
   useEffect(() => {
     if (isOpened && isBomb) {
       dispatch(gameOver("lost"))

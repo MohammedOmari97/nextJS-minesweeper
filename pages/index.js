@@ -4,9 +4,9 @@ import { useSelector } from "react-redux"
 import Options from "../components/options"
 import Game from "../components/game"
 import Layout from "../components/layout"
-import { useEffect, useCallback } from "react"
+import { useEffect, useCallback, memo } from "react"
 
-export default function Home() {
+function Home() {
   const { mode, theme } = useSelector((state) => state.cells)
 
   useEffect(() => {
@@ -119,22 +119,9 @@ export default function Home() {
           as="image"
         />
       </Head>
-
-      <Layout
-        render={render}
-        // render={(setHorizontalScrollBarHeight, setVerticalScrollBarWidth) => {
-        //   if (mode === "options") {
-        //     return <Options />
-        //   } else {
-        //     return (
-        //       <Game
-        //         setHorizontalScrollBarHeight={setHorizontalScrollBarHeight}
-        //         setVerticalScrollBarWidth={setVerticalScrollBarWidth}
-        //       />
-        //     )
-        //   }
-        // }}
-      />
+      <Layout render={render} />
     </div>
   )
 }
+
+export default memo(Home)

@@ -34,3 +34,5 @@ yarn-error.log*
 .vercel
 
 todo.md
+
+/__tests__/something.test.js

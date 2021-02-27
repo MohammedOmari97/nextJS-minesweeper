@@ -3,7 +3,7 @@ import { render, fireEvent } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { Provider } from "react-redux"
 import { Game, store, Layout, Options } from "../components"
-import { getPosition, setIntervalFn } from "../utils/utils"
+import { getPosition } from "../utils/utils"
 import { reset, resetApp } from "../components/store"
 
 function getCell(getAllByTestId, row, column) {
@@ -15,14 +15,27 @@ beforeEach(() => {
   jest.useFakeTimers()
 })
 
+const App = (
+  <Provider store={store}>
+    <Layout
+      render={(setHorizontalScrollBarHeight, setVerticalScrollBarWidth) => {
+        if (store.getState().cells.mode === "options") {
+          return <Options />
+        } else {
+          return (
+            <Game
+              setHorizontalScrollBarHeight={setHorizontalScrollBarHeight}
+              setVerticalScrollBarWidth={setVerticalScrollBarWidth}
+            />
+          )
+        }
+      }}
+    />
+  </Provider>
+)
+
 test("it should display the grid with the correct number of rows and columns", () => {
-  const { getAllByTestId } = render(
-    <Provider store={store}>
-      <Layout>
-        <Game />
-      </Layout>
-    </Provider>
-  )
+  const { getAllByTestId } = render(App)
 
   const { rows, columns } = store.getState().cells
   const gridRows = getAllByTestId("grid-row")
@@ -32,13 +45,7 @@ test("it should display the grid with the correct number of rows and columns", (
 })
 
 test("the grid should not include any bombs once it is rendered", () => {
-  const { getAllByTestId } = render(
-    <Provider store={store}>
-      <Layout>
-        <Game />
-      </Layout>
-    </Provider>
-  )
+  const { getAllByTestId } = render(App)
 
   let state = store.getState().cells
   const randomRow = Math.floor(Math.random() * state.rows)
@@ -95,13 +102,7 @@ test("the grid should not include any bombs once it is rendered", () => {
 })
 
 test("it should display a game over modal when the user reveals all the safe cells without clicking a bomb", () => {
-  const { container, getAllByTestId, getByText } = render(
-    <Provider store={store}>
-      <Layout>
-        <Game />
-      </Layout>
-    </Provider>
-  )
+  const { container, getAllByTestId, getByText } = render(App)
 
   let state = store.getState().cells
   userEvent.click(
@@ -122,13 +123,7 @@ test("it should display a game over modal when the user reveals all the safe cel
 })
 
 test("game over modal should appear if the user clicked a bomb", () => {
-  const { getByText, getAllByTestId } = render(
-    <Provider store={store}>
-      <Layout>
-        <Game />
-      </Layout>
-    </Provider>
-  )
+  const { getByText, getAllByTestId } = render(App)
 
   let state = store.getState().cells
   userEvent.click(
@@ -145,13 +140,7 @@ test("game over modal should appear if the user clicked a bomb", () => {
 })
 
 test("the game should reset after the user clicks on play again", () => {
-  const { getByText, getAllByTestId } = render(
-    <Provider store={store}>
-      <Layout>
-        <Game />
-      </Layout>
-    </Provider>
-  )
+  const { getByText, getAllByTestId } = render(App)
 
   let state = store.getState().cells
   userEvent.click(
@@ -180,13 +169,7 @@ test("the game should reset after the user clicks on play again", () => {
 })
 
 test("the user can't reveal a flagged cell and you can't click it", () => {
-  const { container, getAllByTestId } = render(
-    <Provider store={store}>
-      <Layout>
-        <Game />
-      </Layout>
-    </Provider>
-  )
+  const { container, getAllByTestId } = render(App)
 
   const cell = getCell(getAllByTestId, 5, 5)
   fireEvent.contextMenu(cell)
@@ -209,22 +192,10 @@ test("the user can't reveal a flagged cell and you can't click it", () => {
 test("the remaining cells is changing according to how many safe cells left", () => {
   store.dispatch(resetApp())
 
-  const { getByText, getAllByTestId, getByTestId, rerender } = render(
-    <Provider store={store}>
-      <Layout>
-        {store.getState().cells.mode === "options" ? <Options /> : <Game />}
-      </Layout>
-    </Provider>
-  )
+  const { getByText, getAllByTestId, getByTestId, rerender } = render(App)
 
   userEvent.click(getByText(/Play/i))
-  rerender(
-    <Provider store={store}>
-      <Layout>
-        {store.getState().cells.mode === "options" ? <Options /> : <Game />}
-      </Layout>
-    </Provider>
-  )
+  rerender(App)
 
   let state = store.getState().cells
   expect(getByTestId("remaining-cells").textContent).toBe(
@@ -253,22 +224,10 @@ test("the remaining cells is changing according to how many safe cells left", ()
 test("timer test", () => {
   store.dispatch(resetApp())
 
-  const { getByText, getAllByTestId, rerender } = render(
-    <Provider store={store}>
-      <Layout>
-        {store.getState().cells.mode === "options" ? <Options /> : <Game />}
-      </Layout>
-    </Provider>
-  )
+  const { getByText, getAllByTestId, rerender } = render(App)
 
   userEvent.click(getByText(/Play/i))
-  rerender(
-    <Provider store={store}>
-      <Layout>
-        {store.getState().cells.mode === "options" ? <Options /> : <Game />}
-      </Layout>
-    </Provider>
-  )
+  rerender(App)
 
   let state = store.getState().cells
   let randomCell = getCell(

@@ -16,8 +16,6 @@ function Layout({ render }) {
   const fullscreen = useSelector((state) => state.fullscreen)
   const dispatch = useDispatch()
 
-  console.log("rendering layout")
-
   const [horizontalScrollBarHeight, setHorizontalScrollBarHeight] = useState(0)
   const [verticalScrollBarWidth, setVerticalScrollBarWidth] = useState(0)
 
@@ -35,7 +33,7 @@ function Layout({ render }) {
 
     return () =>
       window.document.removeEventListener("fullscreenchange", listener)
-  })
+  }, [])
 
   return (
     <div

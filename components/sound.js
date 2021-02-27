@@ -41,18 +41,16 @@ function Sound() {
     ) {
       playPop()
       dispatch(increasePlaybackRate())
-
       let delay
       if (deviceWidth <= 850) {
         delay = 50
       } else {
         if (rows > 15 || columns > 15) {
-          delay = 100
+          delay = 500
         } else {
           delay = 1000
         }
       }
-
       for (let i = 0; i < delay; i++) {
         console.log("")
       }

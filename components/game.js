@@ -9,8 +9,6 @@ function Game({ setHorizontalScrollBarHeight, setVerticalScrollBarWidth }) {
   const dispatch = useDispatch()
   const { rows, columns } = useSelector((state) => state.cells)
 
-  console.log("rendering game")
-
   const containerRef = useRef()
 
   useEffect(() => {
