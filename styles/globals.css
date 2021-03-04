@@ -125,3 +125,10 @@ body.dark {
 #__next {
   height: 100%;
 }
+
+@-moz-document url-prefix() {
+  [data-testid="gameOver"] > div {
+    background: white;
+    border: 1px solid #e3e3e355;
+  }
+}
