@@ -41,12 +41,9 @@ function Info() {
                   </div>
                 </div>
                 <p>
-                  An unrevealed tile might have a black hole behind it, it might
-                  not. The idea is to clear all the tiles that don't have black
-                  holes behind them. But, the thing about a black hole – its
-                  main distinguishing feature – is it's black. And the thing
-                  about space, the color of space, your basic space color, is
-                  black. So how are you supposed to avoid them? Here's how:
+                  An unrevealed tile might have a bomb behind it, it might not.
+                  The idea is to clear all the tiles that don't have bombs
+                  behind them.
                 </p>
                 <div className={styles.row}>
                   <div className={styles.clearedCellExample}>
@@ -59,10 +56,10 @@ function Info() {
                   </div>
                 </div>
                 <p>
-                  If you avoid a black hole, the number tells you how many of
-                  the 8 surrounding tiles are a black hole. If it's blank, none
-                  of the surrounding tiles is a black hole. If you think you
-                  know where a black hole is, flag it!
+                  If you avoid a bomb, the number tells you how many of the 8
+                  surrounding tiles are a bomb. If it's blank, none of the
+                  surrounding tiles is a bomb. If you think you know where a
+                  bomb is, flag it!
                 </p>
                 <div className={styles.row}>
                   <div className={styles.flaggedCellExample}>
@@ -77,19 +74,17 @@ function Info() {
                   </div>
                 </div>
                 <p>
-                  Switch into flag mode, and tap the suspected tile. Once you've
-                  flagged enough tiles around a clue, it'll become active. Tap
-                  an active clue to clear all the non-flagged tiles around it.
+                  Right click the tile or in mobile, long click it to turn into
+                  flag mode, and tap the suspected tile. Once you've flagged
+                  enough tiles around a clue, it'll become active. Tap an active
+                  clue to clear all the non-flagged tiles around it.
                 </p>
                 <h2>Github</h2>
                 <p style={{ textAlign: "center" }}>
-                  Source code can be found at our GitHub repository.
+                  Source code can be found at my GitHub repository.
                 </p>
                 <h2>Credit</h2>
-                <p style={{ textAlign: "center" }}>
-                  Built by Google Chrome Labs Thanks to Tokyo Wolf for the
-                  visual design concept.
-                </p>
+                <p style={{ textAlign: "center" }}>Built by Mohamed Al-Omari</p>
               </animated.div>
             </div>
           )
