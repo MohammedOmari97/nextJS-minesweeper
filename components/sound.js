@@ -1,8 +1,19 @@
-import React, { useEffect, useMemo } from "react"
+import React, { useCallback, useEffect, useMemo, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import useSound from "use-sound"
 import { toggleSound, increasePlaybackRate } from "./store"
 import { Volume2, VolumeX } from "react-feather"
+
+function callEvery(n, fn) {
+  let i = 0
+  return function () {
+    i++
+    if (i % n === 0) {
+      console.log("called")
+      fn()
+    }
+  }
+}
 
 function Sound() {
   const dispatch = useDispatch()
@@ -47,6 +58,8 @@ function Sound() {
       } else {
         if (rows > 15 || columns > 15) {
           delay = 500
+        } else if (rows <= 10 || columns <= 10) {
+          delay = 2000
         } else {
           delay = 1000
         }
