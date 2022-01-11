@@ -36,12 +36,11 @@ const initialState = {
   gameOver: false,
   openedCells: [],
   theme: "light",
-  sound: true,
+  sound: false,
   bombsIndexes: [],
   clickedCellsForEmojiAnimation: [],
   playbackRate: 0.75,
   popSoundDelay: 0,
-  // time: "0:0",
 }
 
 const cellsSlice = createSlice({
@@ -397,8 +396,8 @@ const cellsSlice = createSlice({
           return { bombCount, surrounding }
         }
 
-        state.cells[action.payload.row][action.payload.column].isFlag = !state
-          .cells[action.payload.row][action.payload.column].isFlag
+        state.cells[action.payload.row][action.payload.column].isFlag =
+          !state.cells[action.payload.row][action.payload.column].isFlag
 
         let surrounding = getSurrounding(
           action.payload.row,

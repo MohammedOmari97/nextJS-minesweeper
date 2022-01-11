@@ -69,7 +69,7 @@ function Layout({ render }) {
                 dispatch(toggleTheme())
               }}
             />
-            <Sound />
+            {/* <Sound /> */}
           </div>
         </nav>
         {render(setHorizontalScrollBarHeight, setVerticalScrollBarWidth)}
