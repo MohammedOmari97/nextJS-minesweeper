@@ -79,6 +79,7 @@ function Cell({ row, column, ...props }) {
           dispatch(flagCell(row, column))
         }
       }}
+      data-opened={isOpened ? true : false}
       {...props}
     >
       {cellContent}

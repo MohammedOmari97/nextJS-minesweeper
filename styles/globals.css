@@ -55,6 +55,7 @@ body.light {
   --cell-5Plus-text: #a94b5a;
   /* --cell-bomb-bg: #ff4d3daa; */
   /* --cell-bomb-border: #ff4d3d; */
+  --cell-reveal-flash: #fff;
 
   /* ------------- options ------------- */
   --options-bg: #ffdd49;
@@ -114,6 +115,8 @@ body.dark {
   /* --cell-bomb-bg: #ff4d3daa; */
   /* --cell-bomb-border: #ff4d3d; */
   /* ------------------------- */
+  --cell-reveal-flash: #99999988;
+  /* --cell-reveal-flash: #e3e3e311; */
 
   /* ------------- options ------------- */
   --options-bg: #4f8cff;
