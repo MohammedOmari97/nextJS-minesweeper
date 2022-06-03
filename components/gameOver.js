@@ -17,12 +17,8 @@ function getGameOverMessage(status, cellsLeft) {
     } else {
       return (
         <span>
-          That was bad, i guess u should see how the game is played{" "}
-          <img
-            src="/minesweeper-icons/crying-face.png"
-            alt="crying face"
-            style={{ width: "30px", height: "30px", verticalAlign: "middle" }}
-          />
+          Tough luck <br />
+          Don't stop now!, give it another shot!
         </span>
       )
     }
@@ -150,7 +146,7 @@ function GameOver() {
               {props.item === "lost" && (
                 <animated.div className={styles.lost} style={props.props}>
                   <div className={styles.message}>
-                    <div>Ahhhhh, You Lost!</div>
+                    <div>Awww, You Lost!</div>
                     {getGameOverMessage(
                       status,
                       rows * columns - bombs - openedCells.length

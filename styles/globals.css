@@ -49,15 +49,11 @@ body.light {
   --cell-5Plus-border: #e26a6a;
   --cell-5Plus-text: #a94b5a;
   --cell-reveal-flash: #fff;
-
-  /* ------------- options ------------- */
   --options-bg: #ffdd49;
   --options-border: #ffd51b;
   --options-shadow: rgba(255, 213, 27, 0.5);
   --input-text: #000;
-
   --reveal-cell-flash: #fff;
-
   --flag-filter: none;
 }
 
@@ -66,7 +62,6 @@ body.dark {
   --background: #16161a;
   --text-color: #fff;
   --icons-foreground: #fff;
-  /* ------------------------- */
   /* --cell-closed-bg: #fff;
   --cell-closed-border: #99999988; */
   --cell-closed-bg: #768390;
@@ -75,39 +70,29 @@ body.dark {
   --cell-closed-border: #404040;
   /* --cell-closed-bg: #a3a3a3;
   --cell-closed-border: #525252; */
-  /* ------------------------- */
   --cell-0-bg: #e3e3e305;
   /* --cell-0-bg: rgba(0, 0, 0, 0.2); */
-  /* ------------------------- */
   --cell-1-bg: #80d480;
   --cell-1-border: #41bf41;
   --cell-1-text: #2e862e;
-  /* ------------------------- */
   --cell-2-bg: #66c8fd;
   --cell-2-border: #19acfc;
   --cell-2-text: #137bb3;
-  /* ------------------------- */
   --cell-3-bg: #fff066;
   --cell-3-border: #ffe819;
   --cell-3-text: #b9a912;
-  /* ------------------------- */
   --cell-4-bg: #8b62a5;
   --cell-4-border: #511378;
   --cell-4-text: #511378;
-  /* ------------------------- */
   --cell-5Plus-bg: #ff897f;
   --cell-5Plus-border: #e26a6a;
   --cell-5Plus-text: #a94b5a;
-
-  /* ------------- options ------------- */
   --options-bg: #4f8cff;
   --options-border: #216eff;
   --options-shadow: rgba(79, 140, 255, 0.5);
   --input-text: #000;
-
   /* --reveal-cell-flash: #e3e3e355; */
   --reveal-cell-flash: #76839088;
-
   --flag-filter: invert(1);
 }
 
