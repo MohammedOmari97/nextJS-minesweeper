@@ -69,7 +69,6 @@ function Layout({ render }) {
                 dispatch(toggleTheme())
               }}
             />
-            {/* <Sound /> */}
           </div>
         </nav>
         {render(setHorizontalScrollBarHeight, setVerticalScrollBarWidth)}
@@ -95,11 +94,7 @@ function Layout({ render }) {
               onClick={() => dispatch(toggleInfo())}
             />
           )}
-          {mode === "playing" ? (
-            <>
-              <Timer />
-            </>
-          ) : null}
+          {mode === "playing" ? <Timer /> : null}
           {typeof window !== "undefined" ? (
             fullscreen ? (
               <Minimize

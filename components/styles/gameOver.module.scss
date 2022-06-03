@@ -27,6 +27,7 @@
     backdrop-filter: blur(50px);
     justify-content: flex-start;
     overflow: auto;
+    border: 1px solid #e3e3e355;
 
     .message {
       font-size: 22px;

@@ -19,8 +19,8 @@ function getGameOverMessage(status, cellsLeft) {
         <span>
           That was bad, i guess u should see how the game is played{" "}
           <img
-            src="/minesweeper-icons/thinking-face.png"
-            alt="thinking face"
+            src="/minesweeper-icons/crying-face.png"
+            alt="crying face"
             style={{ width: "30px", height: "30px", verticalAlign: "middle" }}
           />
         </span>
@@ -66,9 +66,6 @@ function GameOver() {
       const [scoreMins, scoreSecs] = score
         ? score.split(":")
         : "1000:1000".split(":")
-
-      console.log(time, currentMins, currentSecs)
-      console.log(score, scoreMins, scoreSecs)
 
       if (
         Number(`${currentMins}${currentSecs}`) <

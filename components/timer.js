@@ -16,7 +16,6 @@ function Timer() {
         setSeconds((seconds) => {
           if (seconds + 1 >= 60) {
             setMinutes((minutes) => {
-              console.log(seconds, minutes + 1)
               return minutes + 1
             })
             return 0

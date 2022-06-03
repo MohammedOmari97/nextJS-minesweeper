@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, memo } from "react"
+import React, { useEffect, useLayoutEffect, useRef, memo } from "react"
 import styles from "./styles/game.module.scss"
 import { useDispatch, useSelector } from "react-redux"
 import { initializeGrid } from "../components/store"
@@ -11,8 +11,15 @@ function Game({ setHorizontalScrollBarHeight, setVerticalScrollBarWidth }) {
 
   const containerRef = useRef()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(initializeGrid())
+    setHorizontalScrollBarHeight(
+      window.innerHeight - containerRef.current.clientHeight
+    )
+    setVerticalScrollBarWidth(
+      window.innerWidth - containerRef.current.clientWidth
+    )
+
     const listener = window.addEventListener(
       "resize",
       debounce(() => {

@@ -447,7 +447,6 @@ const cellsSlice = createSlice({
     },
     reset: {
       reducer(state) {
-        console.log(state.rows, state.columns, state.difficulty)
         return {
           ...initialState,
           status: "idel",

@@ -66,10 +66,8 @@ function Cell({ row, column, ...props }) {
       className={`${styles.cell} ${cellStyle}`}
       onClick={(e) => {
         if (e.button === 0 && isActive && isOpened) {
-          dispatch(resetPlaybackRate())
           dispatch(revealSurrounding(row, column))
         } else if (e.button === 0 && !isFlag) {
-          dispatch(resetPlaybackRate())
           dispatch(revealCell(row, column))
         }
       }}
@@ -79,7 +77,7 @@ function Cell({ row, column, ...props }) {
           dispatch(flagCell(row, column))
         }
       }}
-      data-opened={isOpened ? true : false}
+      data-opened={isOpened}
       {...props}
     >
       {cellContent}

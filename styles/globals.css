@@ -22,10 +22,11 @@ body {
 
 body {
   background: var(--background);
-  transition: background 0.1s ease;
+  /* transition: background 0.3s ease; */
 }
 
 body.light {
+  color-scheme: light;
   --background: #fff;
   --text-color: #000;
   --icons-foreground: #000;
@@ -54,17 +55,29 @@ body.light {
   --options-border: #ffd51b;
   --options-shadow: rgba(255, 213, 27, 0.5);
   --input-text: #000;
+
+  --reveal-cell-flash: #fff;
+
+  --flag-filter: none;
 }
 
 body.dark {
+  color-scheme: dark;
   --background: #16161a;
   --text-color: #fff;
   --icons-foreground: #fff;
   /* ------------------------- */
-  --cell-closed-bg: #fff;
-  --cell-closed-border: #99999988;
+  /* --cell-closed-bg: #fff;
+  --cell-closed-border: #99999988; */
+  --cell-closed-bg: #768390;
+  --cell-closed-border: #545d68;
+  --cell-closed-bg: #737373;
+  --cell-closed-border: #404040;
+  /* --cell-closed-bg: #a3a3a3;
+  --cell-closed-border: #525252; */
   /* ------------------------- */
-  --cell-0-bg: #e3e3e311;
+  --cell-0-bg: #e3e3e305;
+  /* --cell-0-bg: rgba(0, 0, 0, 0.2); */
   /* ------------------------- */
   --cell-1-bg: #80d480;
   --cell-1-border: #41bf41;
@@ -91,6 +104,11 @@ body.dark {
   --options-border: #216eff;
   --options-shadow: rgba(79, 140, 255, 0.5);
   --input-text: #000;
+
+  /* --reveal-cell-flash: #e3e3e355; */
+  --reveal-cell-flash: #76839088;
+
+  --flag-filter: invert(1);
 }
 
 #__next {

@@ -9,7 +9,6 @@ function callEvery(n, fn) {
   return function () {
     i++
     if (i % n === 0) {
-      console.log("called")
       fn()
     }
   }
